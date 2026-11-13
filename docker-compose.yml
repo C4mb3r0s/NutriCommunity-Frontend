@@ -1,0 +1,23 @@
+services:
+  # React development server with HMR.
+  frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: nutricommunity-frontend
+    ports:
+      # Host port 4000 maps to Vite's port 4001 inside the container.
+      - "4000:4001"
+    extra_hosts:
+      # Allows the container to reach the backend published on the host.
+      - "host.docker.internal:host-gateway"
+    volumes:
+      # Source changes on the host are immediately available inside the container.
+      - .:/app
+      # Keep container-installed dependencies separate from the host filesystem.
+      - frontend_node_modules:/app/node_modules
+    restart: unless-stopped
+
+volumes:
+  # Stores the dependencies installed inside the development container.
+  frontend_node_modules:
