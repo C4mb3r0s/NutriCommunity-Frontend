@@ -1,9 +1,11 @@
 export interface Post {
   id: string
   authorId: string
+  authorName: string
   contentTypeId: string
+  contentTypeName: string
   title: string
-  description: string | null
+  content: string | null
   status: 'draft' | 'published' | 'archived' | 'deleted'
   publishedAt: string | null
   createdAt: string

@@ -45,10 +45,11 @@ export function PostCard({ post, currentUser, onReaction, onComments, onDelete }
           )}
         </div>
       )}
-      <span className={styles.type}>{post.contentTypeId}</span>
+      <span className={styles.type}>{post.contentTypeName}</span>
+      <p className={styles.author}>{post.authorName}</p>
       <h2>{post.title}</h2>
-      {post.description && <p>
-        {post.description}
+      {post.content && <p>
+        {post.content}
       </p>}
 
       <div className={styles.actions}>

@@ -71,7 +71,7 @@ export function CreatePostModal({ accessToken, onClose, onSuccess }: CreatePostM
             {contentTypes.map((contentType) => <option key={contentType.id} value={contentType.id}>{contentType.name}</option>)}
           </select>
 
-          <label htmlFor="post-description">Descripción</label>
+          <label htmlFor="post-description">Contenido</label>
           <textarea id="post-description" rows={6} maxLength={2000} value={form.description} onChange={(event) => setForm({ ...form, description: event.target.value })} />
 
           <div className={styles.actions}>
