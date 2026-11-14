@@ -15,6 +15,10 @@
   box-shadow: 0 1.5rem 4rem var(--color-shadow);
 }
 
+.registerCard {
+  width: min(100%, 48rem);
+}
+
 .brand {
   display: flex;
   align-items: center;
@@ -39,4 +43,19 @@
 
 .card p {
   color: var(--color-blue);
+}
+
+.link {
+  border: 0;
+  padding: 0;
+  background: transparent;
+  color: var(--color-blue);
+  font-weight: 700;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.link:hover,
+.link:focus-visible {
+  color: var(--color-cyan);
 }

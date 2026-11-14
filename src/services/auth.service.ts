@@ -1,9 +1,21 @@
-import type { LoginFormData } from '../schemas/auth.schema'
+import type {
+  LoginFormData,
+  RegisterFormData
+} from '../schemas/auth.schema'
 import type { LoginResponse, AuthUser } from '../types/auth'
 import { apiRequest } from './api'
 
 export function login(input: LoginFormData): Promise<LoginResponse> {
   return apiRequest<LoginResponse>('/api/auth/login', {
+    method: 'POST',
+    body: JSON.stringify(input)
+  })
+}
+
+export function register(
+  input: RegisterFormData
+): Promise<{ user: AuthUser }> {
+  return apiRequest<{ user: AuthUser }>('/api/auth/register', {
     method: 'POST',
     body: JSON.stringify(input)
   })

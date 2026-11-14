@@ -5,12 +5,12 @@ export const passwordSchema = z.string()
   .max(128, 'La contraseña no puede superar los 128 caracteres')
   .regex(/[A-Z]/, 'Debe contener al menos una letra mayúscula')
   .regex(/[a-z]/, 'Debe contener al menos una letra minúscula')
-  .regex(/[1-9]/, 'Debe contener al menos un número')
-  .regex(/[^A-Za-a0-9\s]/, 'Debe contener al menos un caracter especial')
+  .regex(/[0-9]/, 'Debe contener al menos un número')
+  .regex(/[^A-Za-z0-9\s]/, 'Debe contener al menos un carácter especial')
 
 export const loginSchema = z.object({
-  email: z.email().trim(),
-  password: z.string().min(10).max(128)
+  email: z.email().trim().max(255),
+  password: z.string().min(1).max(128)
 })
 
 export const registerSchema = z.object({

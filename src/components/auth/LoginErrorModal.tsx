@@ -3,11 +3,13 @@ import styles from './LoginErrorModal.module.css'
 interface LoginErrorModalProps {
   message: string
   onClose: () => void
+  title?: string
 }
 
 export function LoginErrorModal({
   message,
-  onClose
+  onClose,
+  title = 'No se pudo iniciar sesión'
 }: LoginErrorModalProps) {
   return (
     <div className={styles.overlay} role="presentation">
@@ -17,7 +19,7 @@ export function LoginErrorModal({
         aria-modal="true"
         aria-labelledby="login-error-title"
       >
-        <h2 id="login-error-title">no se pudo iniciar sesión</h2>
+        <h2 id="login-error-title">{title}</h2>
         <p>{message}</p>
         <button type="button" onClick={onClose}>
           Cerrar
@@ -26,4 +28,3 @@ export function LoginErrorModal({
     </div>
   )
 }
-

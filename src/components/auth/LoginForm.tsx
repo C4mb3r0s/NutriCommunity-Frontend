@@ -77,7 +77,7 @@ export function LoginForm({ onSuccess }: LoginFormProps) {
 
 function getLoginErrorMessage(error: unknown): string {
   if (error instanceof ZodError) {
-    return 'Revisa el correo y la contraseña. La contraseña debe tener al menos 10 caracteres.'
+    return 'Revisa el correo y la contraseña. La contraseña es obligatoria y no puede superar los 128 caracteres.'
   }
 
   if (error instanceof ApiError) {

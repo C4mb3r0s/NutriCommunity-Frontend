@@ -74,3 +74,18 @@
   color: var(--color-white);
   cursor: pointer;
 }
+
+.menuLink {
+  margin-top: 0.5rem;
+  padding: 0.6rem;
+  background: var(--color-cyan);
+  color: var(--color-navy);
+  font-weight: 700;
+  text-align: center;
+  text-decoration: none;
+}
+
+.menuLink:hover,
+.menuLink:focus-visible {
+  background: var(--color-light-cyan);
+}
