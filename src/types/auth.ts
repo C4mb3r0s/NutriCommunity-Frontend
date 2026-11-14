@@ -2,7 +2,7 @@ export interface AuthUser {
   id: string
   firstName: string
   secondname: string | null
-  lasName: string
+  lastName: string
   secondLastName: string | null
   email: string
   roles: string[]
