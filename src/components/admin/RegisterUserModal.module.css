@@ -1,0 +1,48 @@
+.overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 10;
+  display: grid;
+  place-items: center;
+  padding: 1rem;
+  background: rgb(17 46 64 / 65%);
+}
+
+.modal {
+  width: min(100%, 52rem);
+  max-height: calc(100vh - 2rem);
+  overflow-y: auto;
+  border-radius: 1rem;
+  padding: clamp(1.25rem, 4vw, 2rem);
+  background: var(--color-white);
+  color: var(--color-navy);
+  box-shadow: 0 1.5rem 4rem var(--color-shadow);
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1.25rem;
+}
+
+.header h2 {
+  margin: 0;
+}
+
+.closeButton {
+  border: 0;
+  border-radius: 0.4rem;
+  padding: 0.25rem 0.65rem;
+  background: transparent;
+  color: var(--color-navy);
+  font-size: 1.75rem;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.closeButton:hover,
+.closeButton:focus-visible {
+  background: var(--color-blue-gray);
+}

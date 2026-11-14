@@ -2,17 +2,19 @@ import { useState, type FormEvent } from 'react'
 import { ZodError } from 'zod'
 import { registerSchema, type RegisterFormData } from '../../schemas/auth.schema'
 import { ApiError } from '../../services/api'
-import { register as registerRequest } from '../../services/auth.service'
+import { registerAdmin } from '../../services/auth.service'
 import { LoginErrorModal } from './LoginErrorModal'
+import { PasswordField } from './PasswordField'
 import styles from './LoginForm.module.css'
 
 interface RegisterFormProps {
+  accessToken: string
   onSuccess: () => void
 }
 
 type RegisterFormState = RegisterFormData & { confirmPassword: string }
 
-export function RegisterForm({ onSuccess }: RegisterFormProps) {
+export function RegisterForm({ accessToken, onSuccess }: RegisterFormProps) {
   const [form, setForm] = useState<RegisterFormState>({
     firstName: '', secondName: '', lastName: '', secondLastName: '',
     email: '', password: '', confirmPassword: ''
@@ -37,7 +39,7 @@ export function RegisterForm({ onSuccess }: RegisterFormProps) {
       }
 
       setIsSubmitting(true)
-      await registerRequest(input)
+      await registerAdmin(input, accessToken)
       onSuccess()
     } catch (error) {
       setErrorMessage(getRegisterErrorMessage(error))
@@ -76,13 +78,13 @@ export function RegisterForm({ onSuccess }: RegisterFormProps) {
 
         <div className={styles.field}>
           <label htmlFor="register-password">Contraseña</label>
-          <input id="register-password" name="password" type="password" autoComplete="new-password" value={form.password} onChange={(event) => updateField('password', event.target.value)} aria-describedby="password-requirements" required />
+          <PasswordField id="register-password" name="password" autoComplete="new-password" value={form.password} onChange={(password) => updateField('password', password)} ariaDescribedBy="password-requirements" />
           <small id="password-requirements">Mínimo 10 caracteres, una mayúscula, una minúscula, un número y un carácter especial.</small>
         </div>
 
         <div className={styles.field}>
           <label htmlFor="confirmPassword">Confirmar contraseña</label>
-          <input id="confirmPassword" name="confirmPassword" type="password" autoComplete="new-password" value={form.confirmPassword} onChange={(event) => updateField('confirmPassword', event.target.value)} required />
+          <PasswordField id="confirmPassword" name="confirmPassword" autoComplete="new-password" value={form.confirmPassword} onChange={(password) => updateField('confirmPassword', password)} />
         </div>
 
         <button className={styles.submitButton} type="submit" disabled={isSubmitting}>

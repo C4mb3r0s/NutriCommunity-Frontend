@@ -4,6 +4,7 @@ import { loginSchema, type LoginFormData } from '../../schemas/auth.schema'
 import { ApiError } from '../../services/api'
 import { useAuth } from '../../hooks/useAuth'
 import { LoginErrorModal } from './LoginErrorModal'
+import { PasswordField } from './PasswordField'
 import styles from './LoginForm.module.css'
 
 interface LoginFormProps {
@@ -50,14 +51,12 @@ export function LoginForm({ onSuccess }: LoginFormProps) {
         />
 
         <label htmlFor="password">Contraseña</label>
-        <input
+        <PasswordField
           id="password"
           name="password"
-          type="password"
           autoComplete="current-password"
           value={form.password}
-          onChange={(event) => setForm({ ...form, password: event.target.value })}
-          required
+          onChange={(password) => setForm({ ...form, password })}
         />
 
         <button type="submit" disabled={isSubmitting}>

@@ -17,17 +17,6 @@ export function LoginPage() {
         <p>Inicia sesión para continuar con tu comunidad</p>
 
         <LoginForm onSuccess={() => navigate('/')} />
-
-        <p>
-          ¿Aún no tienes una cuenta?{' '}
-          <button
-            className={styles.link}
-            type="button"
-            onClick={() => navigate('/register')}
-          >
-            Regístrate
-          </button>
-        </p>
       </section>
     </main>
   )

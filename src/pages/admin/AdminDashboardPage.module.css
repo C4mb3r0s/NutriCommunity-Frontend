@@ -4,9 +4,33 @@
   background: var(--color-blue-gray);
 }
 
-.page h1 {
+.heading {
   width: min(100%, 72rem);
   margin: 0 auto 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.page h1 {
+  margin: 0;
+  color: var(--color-navy);
+}
+
+.registerButton {
+  border: 0;
+  border-radius: 0.5rem;
+  padding: 0.7rem 1rem;
+  background: var(--color-blue);
+  color: var(--color-white);
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.registerButton:hover,
+.registerButton:focus-visible {
+  background: var(--color-cyan);
   color: var(--color-navy);
 }
 
@@ -39,6 +63,8 @@
 .page th {
   background: var(--color-navy);
   color: var(--color-white);
+  font-weight: 700;
+  text-align: center;
 }
 
 .page tr:last-child td {
@@ -50,18 +76,69 @@
   border: 0;
   border-radius: 0.4rem;
   padding: 0.5rem 0.7rem;
-  background: var(--color-blue);
   color: var(--color-white);
   cursor: pointer;
 }
 
-.page td button:hover,
+.activateButton {
+  background: #16803c;
+}
+
+.suspendButton {
+  background: #b86b00;
+}
+
+.deleteButton {
+  background: var(--color-danger);
+}
+
+.activateButton:hover,
+.activateButton:focus-visible {
+  background: #0f5f2d;
+}
+
+.suspendButton:hover,
+.suspendButton:focus-visible {
+  background: #8f5200;
+}
+
+.deleteButton:hover,
+.deleteButton:focus-visible {
+  background: #861c13;
+}
+
+.page td {
+  text-align: left;
+}
+
+.page td:nth-child(2),
+.page td:nth-child(3),
+.page td:nth-child(4) {
+  text-align: center;
+}
+
 .page td button:focus-visible {
-  background: var(--color-cyan);
-  color: var(--color-navy);
+  outline: 3px solid var(--color-light-cyan);
+  outline-offset: 2px;
+}
+
+.page td button:disabled {
+  opacity: 0.65;
+  cursor: wait;
+}
+
+.protectedLabel {
+  color: var(--color-blue);
+  font-size: 0.9rem;
+  font-weight: 700;
 }
 
 @media (max-width: 42rem) {
+  .heading {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
   .page table {
     display: block;
     overflow-x: auto;

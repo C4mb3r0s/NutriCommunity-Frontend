@@ -7,6 +7,7 @@ export interface AdminUser {
   email: string
   status: 'active' | 'suspended' | 'deleted'
   createdAt: string
+  roles?: string[]
 }
 
 export interface AdminUserResponse {

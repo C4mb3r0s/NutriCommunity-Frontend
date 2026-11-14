@@ -12,11 +12,18 @@ export function login(input: LoginFormData): Promise<LoginResponse> {
   })
 }
 
-export function register(
-  input: RegisterFormData
+export function registerAdmin(
+  input: RegisterFormData,
+  accessToken: string
 ): Promise<{ user: AuthUser }> {
-  return apiRequest<{ user: AuthUser }>('/api/auth/register', {
+  const csrfToken = getCsrfCookie()
+
+  return apiRequest<{ user: AuthUser }>('/api/admin/users', {
     method: 'POST',
+    accessToken,
+    headers: {
+      'X-CSRF-Token': csrfToken
+    },
     body: JSON.stringify(input)
   })
 }

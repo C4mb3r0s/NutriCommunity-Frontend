@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useState } from 'react'
 import { useAuth } from '../../hooks/useAuth'
 import { getUsers, updateUserStatus } from '../../services/admin.service'
+import { RegisterUserModal } from '../../components/admin/RegisterUserModal'
 import type { AdminUser } from '../../types/user'
 import styles from './AdminDashboardPage.module.css'
 
@@ -8,6 +9,7 @@ export function AdminDashboardPage() {
   const { accessToken } = useAuth()
   const [users, setUsers] = useState<AdminUser[]>([])
   const [error, setError] = useState<string | null>(null)
+  const [isRegisterOpen, setIsRegisterOpen] = useState(false)
 
   const loadUsers = useCallback(async () => {
     if (!accessToken) return
@@ -38,9 +40,24 @@ export function AdminDashboardPage() {
     }
   }
 
+  const handleDelete = (userId: string) => {
+    if (!window.confirm('¿Deseas eliminar este usuario?')) return
+
+    void handleStatusChange(userId, 'deleted')
+  }
+
   return (
     <main className={styles.page}>
-      <h1>Dashboard administrativo</h1>
+      <div className={styles.heading}>
+        <h1>Dashboard administrativo</h1>
+        <button
+          className={styles.registerButton}
+          type="button"
+          onClick={() => setIsRegisterOpen(true)}
+        >
+          Registrar usuario
+        </button>
+      </div>
 
       {error && <p role="alert">{error}</p>}
 
@@ -54,24 +71,48 @@ export function AdminDashboardPage() {
           </tr>
         </thead>
         <tbody>
-          {users.map((user) => (
+          {users.map((user) => {
+            const isProtected = user.roles === undefined || user.roles.includes('admin')
+
+            return (
             <tr key={user.id}>
               <td>{user.firstName} {user.secondName} {user.lastName} {user.secondLastName}</td>
               <td>{user.email}</td>
               <td>{user.status}</td>
               <td>
-                <button
-                  type="button"
-                  onClick={() => void handleStatusChange(user.id, 'active')}>Activar</button>
-                <button
-                  type="button"
-                  onClick={() => void handleStatusChange(user.id, 'suspended')}>Suspender</button>
+                {isProtected
+                  ? <span className={styles.protectedLabel}>Administrador protegido</span>
+                  : <>
+                    <button
+                      className={styles.activateButton}
+                      type="button"
+                      onClick={() => void handleStatusChange(user.id, 'active')}>Activar</button>
+                    <button
+                      className={styles.suspendButton}
+                      type="button"
+                      onClick={() => void handleStatusChange(user.id, 'suspended')}>Suspender</button>
+                    <button
+                      className={styles.deleteButton}
+                      type="button"
+                      onClick={() => handleDelete(user.id)}>Eliminar</button>
+                  </>}
               </td>
             </tr>
-          ))}
+            )
+          })}
         </tbody>
       </table>
 
+      {isRegisterOpen && accessToken && (
+        <RegisterUserModal
+          accessToken={accessToken}
+          onClose={() => setIsRegisterOpen(false)}
+          onSuccess={() => {
+            setIsRegisterOpen(false)
+            void loadUsers()
+          }}
+        />
+      )}
     </main>
   )
 }

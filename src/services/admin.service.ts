@@ -18,7 +18,7 @@ export function updateUserStatus(
     .find((value) => value.startsWith('csrf_token='))
     ?.split('=')[1] ?? ''
 
-  return apiRequest(`api/admin/users/${userId}/status`, {
+  return apiRequest(`/api/admin/users/${userId}/status`, {
     method: 'PATCH',
     accessToken,
     headers: {
