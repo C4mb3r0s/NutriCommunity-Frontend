@@ -8,6 +8,7 @@ import { apiRequest } from './api'
 export function login(input: LoginFormData): Promise<LoginResponse> {
   return apiRequest<LoginResponse>('/api/auth/login', {
     method: 'POST',
+    skipAuthRefresh: true,
     body: JSON.stringify(input)
   })
 }
@@ -41,6 +42,7 @@ export function refreshAccessToken(): Promise<{ accessToken: string }> {
 
   return apiRequest<{ accessToken: string }>('/api/auth/refresh', {
     method: 'POST',
+    skipAuthRefresh: true,
     headers: {
       'X-CSRF-Token': csrfToken
     }
@@ -53,6 +55,7 @@ export function logout(accessToken: string): Promise<void> {
   return apiRequest<void>('/api/auth/logout', {
     method: 'POST',
     accessToken,
+    skipAuthRefresh: true,
     headers: {
       'X-CSRF-Token': csrfToken
     }

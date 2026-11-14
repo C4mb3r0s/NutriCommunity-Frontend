@@ -15,6 +15,11 @@ import {
   refreshAccessToken
 } from '../services/auth.service'
 import type { AuthUser } from '../types/auth'
+import {
+  clearAuthSession,
+  configureAuthSession,
+  setAccessToken as setSessionAccessToken
+} from '../services/auth-session'
 
 interface AuthContextValue {
   accessToken: string | null
@@ -39,6 +44,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
 
   const login = useCallback(async (input: LoginFormData) => {
     const result = await loginRequest(input)
+    setSessionAccessToken(result.accessToken)
     setAccessToken(result.accessToken)
     setUser(result.user)
   }, [])
@@ -49,21 +55,34 @@ export function AuthProvider({ children }: AuthProviderProps) {
         await logoutRequest(accessToken)
       }
     } finally {
+      clearAuthSession()
       setAccessToken(null)
       setUser(null)
     }
   }, [accessToken])
 
   useEffect(() => {
+    configureAuthSession(
+      async () => (await refreshAccessToken()).accessToken,
+      () => {
+        clearAuthSession()
+        setAccessToken(null)
+        setUser(null)
+      }
+    )
+
     if (!initializationRef.current) {
       initializationRef.current = (async () => {
         try {
           const { accessToken: refreshedAccessToken } = await refreshAccessToken()
           const { user: currentUser } = await getCurrentUser(refreshedAccessToken)
 
+          setSessionAccessToken(refreshedAccessToken)
           setAccessToken(refreshedAccessToken)
           setUser(currentUser)
         } catch {
+          clearAuthSession()
+          setSessionAccessToken(null)
           setAccessToken(null)
           setUser(null)
         } finally {
