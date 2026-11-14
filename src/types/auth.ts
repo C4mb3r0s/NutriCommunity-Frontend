@@ -11,7 +11,7 @@ export interface AuthUser {
 
 export interface LoginInput {
   email: string
-  passport: string
+  password: string
 }
 
 export interface LoginResponse {

@@ -1,0 +1,45 @@
+.form {
+  display: grid;
+  gap: 0.75rem;
+  width: min(100%, 24rem);
+}
+
+.form label {
+  color: var(--color-navy);
+  font-weight: 600;
+}
+
+.form input {
+  border: 1px solid var(--color-blue-gray);
+  border-radius: 0.5rem;
+  padding: 0.8rem 0.9rem;
+  color: var(--color-navy);
+  background: var(--color-white);
+}
+
+.form input:focus {
+  outline: 3px solid rgb(65 209 243 / 35%);
+  border-color: var(--color-blue);
+}
+
+.form button {
+  margin-top: 0.75rem;
+  border: 0;
+  border-radius: 0.5rem;
+  padding: 0.85rem 1rem;
+  background: var(--color-blue);
+  color: var(--color-white);
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.form button:hover,
+.form button:focus-visible {
+  background: var(--color-cyan);
+  color: var(--color-navy);
+}
+
+.form button:disabled {
+  opacity: 0.65;
+  cursor: wait;
+}
