@@ -2,19 +2,21 @@ import { useState } from 'react'
 import type { Post } from '../../types/post'
 import type { AuthUser } from '../../types/auth'
 import { CommentButton } from '../comments/CommentButtons'
+import { CommentsPanel } from '../comments/CommentsPanel'
 import { ReactionButtons } from '../reactions/ReactionButtons'
+import type { ReactionResponse, ReactionType } from '../../types/reaction'
 import styles from './PostCard.module.css'
 
 interface PostCardProps {
   post: Post
   currentUser: AuthUser
-  onReaction: (postId: string, type: 'like' | 'love' | 'amaze') => void
-  onComments: (postId: string) => void
+  onReaction: (postId: string, type: ReactionType) => Promise<ReactionResponse>
   onDelete: (postId: string) => void
 }
 
-export function PostCard({ post, currentUser, onReaction, onComments, onDelete }: PostCardProps) {
+export function PostCard({ post, currentUser, onReaction, onDelete }: PostCardProps) {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
+  const [isCommentsOpen, setIsCommentsOpen] = useState(false)
   const canDelete = currentUser.id === post.authorId || currentUser.roles.includes('admin')
 
   const handleDelete = () => {
@@ -58,8 +60,10 @@ export function PostCard({ post, currentUser, onReaction, onComments, onDelete }
           onReaction={onReaction}
         />
 
-        <CommentButton onClick={() => onComments(post.id)} />
+        <CommentButton onClick={() => setIsCommentsOpen((open) => !open)} />
       </div>
+
+      {isCommentsOpen && <CommentsPanel postId={post.id} />}
     </article>
   )
 }

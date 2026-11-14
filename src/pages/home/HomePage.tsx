@@ -4,6 +4,7 @@ import { CreatePostModal } from '../../components/posts/CreatePostModal'
 import { useAuth } from '../../hooks/useAuth'
 import { deletePost, getPosts, toggleReaction } from '../../services/post.service'
 import type { Post, PostResponse } from '../../types/post'
+import type { ReactionResponse, ReactionType } from '../../types/reaction'
 import styles from './HomePage.module.css'
 
 export function HomePage() {
@@ -28,19 +29,18 @@ export function HomePage() {
 
   const handleReaction = async (
     postId: string,
-    type: 'like' | 'love' | 'amaze'
-  ) => {
-    if (!accessToken) return
+    type: ReactionType
+  ): Promise<ReactionResponse> => {
+    if (!accessToken) {
+      throw new Error('Authentication required')
+    }
 
     try {
-      await toggleReaction(postId, accessToken, type)
+      return await toggleReaction(postId, accessToken, type)
     } catch {
       setError('No fue posible registrar la reacción.')
+      throw new Error('Reaction failed')
     }
-  }
-
-  const handleComments = (postId: string) => {
-    console.log(`Open comments for the post ${postId}`)
   }
 
   const handleDelete = async (postId: string) => {
@@ -76,7 +76,6 @@ export function HomePage() {
             post={post}
             currentUser={user!}
             onReaction={handleReaction}
-            onComments={handleComments}
             onDelete={(postId) => void handleDelete(postId)}
           />
         ))}

@@ -4,6 +4,7 @@ import type {
   CreatePostInput,
   PostResponse
 } from '../types/post'
+import type { ReactionResponse, ReactionType } from '../types/reaction'
 
 export function getPosts(page: number, limit = 20) {
   return apiRequest<PostResponse>(
@@ -38,9 +39,9 @@ export function deletePost(postId: string, accessToken: string) {
 export function toggleReaction(
   postId: string,
   accessToken: string,
-  type: 'like' | 'love' | 'amaze'
-) {
-  return apiRequest(`/api/posts/${postId}/reaction`, {
+  type: ReactionType
+): Promise<ReactionResponse> {
+  return apiRequest<ReactionResponse>(`/api/posts/${postId}/reaction`, {
     method: 'PUT',
     accessToken,
     body: JSON.stringify({ type }),
