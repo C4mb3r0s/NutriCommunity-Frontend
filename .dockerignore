@@ -1,9 +1,37 @@
-node_modules
-dist
-.git
+# Git and local repository metadata.
+.git/
 .gitignore
+.github/
+
+# Dependencies and generated build artifacts.
+node_modules/
+.pnpm-store/
+dist/
+dist-ssr/
+coverage/
+*.tsbuildinfo
+
+# Local environment files and secrets.
 .env
 .env.*
 !.env.example
-coverage
-README.md
+secrets/
+*.secret
+*.secret.*
+*.pem
+*.key
+*.crt
+*.cer
+*.p12
+*.pfx
+
+# Local tools, logs, and temporary files.
+.cache/
+.vite/
+.eslintcache
+tmp/
+temp/
+*.log
+*.swp
+*.swo
+*.orig
