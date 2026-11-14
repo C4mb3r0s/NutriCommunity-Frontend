@@ -14,7 +14,7 @@ export function LoginPage() {
         </div>
 
         <h1>Bienvenido</h1>
-        <p>Inicia sesión para continuas con tu comunidad</p>
+        <p>Inicia sesión para continuar con tu comunidad</p>
 
         <LoginForm onSuccess={() => navigate('/')} />
       </section>
