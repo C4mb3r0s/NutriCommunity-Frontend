@@ -31,7 +31,7 @@ export function refreshAccessToken(): Promise<{ accessToken: string }> {
 export function logout(accessToken: string): Promise<void> {
   const csrfToken = getCsrfCookie()
 
-  return apiRequest<void>('/apí/logout', {
+  return apiRequest<void>('/api/auth/logout', {
     method: 'POST',
     accessToken,
     headers: {
@@ -43,8 +43,7 @@ export function logout(accessToken: string): Promise<void> {
 function getCsrfCookie(): string {
   const cookie = document.cookie
     .split('; ')
-    .find((value) => value.startsWith('csrf-token='))
+    .find((value) => value.startsWith('csrf_token='))
 
   return cookie ? decodeURIComponent(cookie.split('=')[1]) : ''
 }
-

@@ -1,7 +1,7 @@
 export interface AuthUser {
   id: string
   firstName: string
-  secondname: string | null
+  secondName: string | null
   lastName: string
   secondLastName: string | null
   email: string
@@ -16,4 +16,5 @@ export interface LoginInput {
 
 export interface LoginResponse {
   accessToken: string
+  user: AuthUser
 }

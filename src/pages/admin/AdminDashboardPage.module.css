@@ -1,0 +1,70 @@
+.page {
+  min-height: calc(100vh - 4.5rem);
+  padding: clamp(1.25rem, 4vw, 3rem);
+  background: var(--color-blue-gray);
+}
+
+.page h1 {
+  width: min(100%, 72rem);
+  margin: 0 auto 1.5rem;
+  color: var(--color-navy);
+}
+
+.page > p[role='alert'] {
+  width: min(100%, 72rem);
+  margin: 0 auto 1rem;
+  border-radius: 0.5rem;
+  padding: 0.75rem 1rem;
+  background: var(--color-danger-background);
+  color: var(--color-danger);
+}
+
+.page table {
+  width: min(100%, 72rem);
+  margin: 0 auto;
+  border-collapse: collapse;
+  overflow: hidden;
+  border-radius: 0.75rem;
+  background: var(--color-white);
+  box-shadow: 0 0.5rem 1.5rem var(--color-shadow);
+}
+
+.page th,
+.page td {
+  padding: 0.9rem 1rem;
+  border-bottom: 1px solid var(--color-border);
+  text-align: left;
+}
+
+.page th {
+  background: var(--color-navy);
+  color: var(--color-white);
+}
+
+.page tr:last-child td {
+  border-bottom: 0;
+}
+
+.page td button {
+  margin: 0.2rem;
+  border: 0;
+  border-radius: 0.4rem;
+  padding: 0.5rem 0.7rem;
+  background: var(--color-blue);
+  color: var(--color-white);
+  cursor: pointer;
+}
+
+.page td button:hover,
+.page td button:focus-visible {
+  background: var(--color-cyan);
+  color: var(--color-navy);
+}
+
+@media (max-width: 42rem) {
+  .page table {
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+}

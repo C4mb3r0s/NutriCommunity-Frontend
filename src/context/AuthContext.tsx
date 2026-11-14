@@ -42,14 +42,14 @@ export function AuthProvider({ children }: AuthProviderProps) {
     setUser(null)
   }, [accessToken])
 
-  const value = useMemo(() => {
+  const value = useMemo(() => ({
     accessToken,
-      user,
-      isAuthenticated: Boolean(accessToken && user),
-        login,
-        logout
+    user,
+    isAuthenticated: Boolean(accessToken && user),
+    login,
+    logout
 
-  }), [accessToken, user, login, logout]
+  }), [accessToken, user, login, logout])
 
   return (
     <AuthContext.Provider value={value}>

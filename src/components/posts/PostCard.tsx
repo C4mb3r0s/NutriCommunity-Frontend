@@ -1,5 +1,5 @@
 import type { Post } from '../../types/post'
-import { CommentButton } from '../comments/CommentButton'
+import { CommentButton } from '../comments/CommentButtons'
 import { ReactionButtons } from '../reactions/ReactionButtons'
 import styles from './PostCard.module.css'
 

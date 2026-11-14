@@ -1,0 +1,21 @@
+.group {
+  display: flex;
+  gap: 0.45rem;
+}
+
+.group button {
+  border: 1px solid var(--color-blue-gray);
+  border-radius: 0.5rem;
+  padding: 0.55rem 0.7rem;
+  background: var(--color-blue-gray);
+  color: var(--color-navy);
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.group button:hover,
+.group button:focus-visible {
+  border-color: var(--color-cyan);
+  background: var(--color-cyan);
+}

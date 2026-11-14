@@ -1,0 +1,42 @@
+.card {
+  display: grid;
+  gap: 0.85rem;
+  min-height: 12rem;
+  padding: 1.25rem;
+  border: 1px solid var(--color-border);
+  border-radius: 1rem;
+  background: var(--color-white);
+  box-shadow: 0 0.5rem 1.5rem var(--color-shadow);
+}
+
+.card h2 {
+  margin: 0;
+  color: var(--color-navy);
+  font-size: 1.25rem;
+}
+
+.card p {
+  margin: 0;
+  color: var(--color-blue);
+  line-height: 1.55;
+}
+
+.type {
+  justify-self: start;
+  border-radius: 999px;
+  padding: 0.3rem 0.65rem;
+  background: var(--color-blue-gray);
+  color: var(--color-blue);
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-top: auto;
+  padding-top: 0.75rem;
+  border-top: 1px solid var(--color-border);
+}

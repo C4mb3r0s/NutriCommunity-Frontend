@@ -1,0 +1,21 @@
+:root {
+  color: var(--color-navy);
+  background: var(--color-blue-gray);
+}
+
+#root {
+  min-height: 100vh;
+}
+
+a {
+  color: inherit;
+}
+
+button {
+  transition: background-color 160ms ease, color 160ms ease,
+    border-color 160ms ease, transform 160ms ease;
+}
+
+button:active:not(:disabled) {
+  transform: translateY(1px);
+}

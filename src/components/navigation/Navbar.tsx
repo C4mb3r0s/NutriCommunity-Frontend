@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { useAuth } from '../../hooks/useAuth'
 import styles from './Navbar.module.css'
 
-export const Navbar () {
+export function Navbar () {
   const { user, logout } = useAuth()
   const [isOpen, setIsOpen] = useState(false)
 
@@ -10,7 +10,7 @@ export const Navbar () {
 
   const fullName = [
     user.firstName,
-    user.secondLastName,
+    user.secondName,
     user.lastName,
     user.secondLastName
   ].filter(Boolean).join(' ')
@@ -22,9 +22,9 @@ export const Navbar () {
         <span>NutriCommunity</span>
       </a>
 
-      <div>
+      <div className={styles.userArea}>
         <button
-          className={styles.userArea}
+          className={styles.userButton}
           type="button"
           onClick={() => setIsOpen(!isOpen)}
           aria-expanded={isOpen}
