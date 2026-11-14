@@ -19,3 +19,16 @@ export interface PostResponse {
     totalPages: number
   }
 }
+
+export interface ContentType {
+  id: string
+  code: string
+  name: string
+}
+
+export interface CreatePostInput {
+  title: string
+  description?: string
+  contentTypeId: string
+  status: 'draft' | 'published'
+}
