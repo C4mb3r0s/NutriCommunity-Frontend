@@ -16,6 +16,7 @@ export function AdminDashboardPage() {
 
     try {
       const result = await getUsers(accessToken)
+      setError(null)
       setUsers(result.data)
     } catch {
       setError('No fue posible cargar los usuarios.')
@@ -23,7 +24,11 @@ export function AdminDashboardPage() {
   }, [accessToken])
 
   useEffect(() => {
-    void loadUsers()
+    const timeoutId = window.setTimeout(() => {
+      void loadUsers()
+    }, 0)
+
+    return () => window.clearTimeout(timeoutId)
   }, [loadUsers])
 
   const handleStatusChange = async (

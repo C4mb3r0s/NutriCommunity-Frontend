@@ -1,5 +1,4 @@
 import {
-  createContext,
   useCallback,
   useEffect,
   useMemo,
@@ -7,30 +6,20 @@ import {
   useState,
   type ReactNode
 } from 'react'
+import { AuthContext } from './auth-context'
 import type { LoginFormData } from '../schemas/auth.schema'
+import type { AuthUser } from '../types/auth'
 import {
   getCurrentUser,
   login as loginRequest,
   logout as logoutRequest,
   refreshAccessToken
 } from '../services/auth.service'
-import type { AuthUser } from '../types/auth'
 import {
   clearAuthSession,
   configureAuthSession,
   setAccessToken as setSessionAccessToken
 } from '../services/auth-session'
-
-interface AuthContextValue {
-  accessToken: string | null
-  user: AuthUser | null
-  isAuthenticated: boolean
-  isInitializing: boolean
-  login: (input: LoginFormData) => Promise<void>
-  logout: () => Promise<void>
-}
-
-export const AuthContext = createContext<AuthContextValue | null>(null)
 
 interface AuthProviderProps {
   children: ReactNode

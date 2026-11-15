@@ -16,15 +16,20 @@ export function HomePage() {
 
   const loadPosts = useCallback(async () => {
     try {
+      const nextResult = await getPosts(page)
       setError(null)
-      setResult(await getPosts(page))
+      setResult(nextResult)
     } catch {
       setError('No fue posible cargar las publicaciones')
     }
   }, [page])
 
   useEffect(() => {
-    void loadPosts()
+    const timeoutId = window.setTimeout(() => {
+      void loadPosts()
+    }, 0)
+
+    return () => window.clearTimeout(timeoutId)
   }, [loadPosts])
 
   const handleReaction = async (
